@@ -122,20 +122,6 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
-st.title("IA Radio Assistant")
-
-st.markdown(
-    """
-Hi ! Welcome to your new AI Radiology Assistant. The purpose of this AI is to analyze images and make a pseudo-diagnostic over it.<br>
-You can do 2 things here : <br>
-- Enter a new image
-- Check out already treated images
-Enjoy the tool ! 
-""",
-    unsafe_allow_html=True,
-)
-
 st.write("---")
 
 
