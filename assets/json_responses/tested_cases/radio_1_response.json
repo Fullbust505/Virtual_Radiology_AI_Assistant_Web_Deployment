@@ -1,0 +1,10 @@
+{
+  "image_quality": "bonne",
+  "visual_evidence": "The lung fields appear clear, with no obvious consolidation, infiltrates, or pleural effusions. The heart size is within normal limits. The mediastinal contours are unremarkable.",
+  "reasoning": "I observed clear lung fields and a normal heart size on the chest X-ray. This is consistent with a normal state. Therefore, the predicted class is normal.",
+  "predicted_class": "normal",
+  "confidence": 0.95,
+  "justification": "The lung fields are clear, and there are no obvious signs of opacity or consolidation. The heart size is within normal limits, and the mediastinal contours are unremarkable.",
+  "limitations": "None identified.",
+  "warning": "Outil pédagogique uniquement — aucune valeur diagnostique réelle. Ne jamais utiliser ce résultat pour une décision médicale."
+}
