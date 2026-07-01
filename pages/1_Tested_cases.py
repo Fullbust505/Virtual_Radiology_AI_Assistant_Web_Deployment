@@ -3,6 +3,7 @@ import os
 import json
 import pandas as pd
 
+from complement_functions import display_image_dec
 
 # Config parameters
 
@@ -43,18 +44,14 @@ selected = st.sidebar.selectbox(
     radios
 )
 
-st.write(f"Vous avez choisi : {selected}")
+st.write(f"You selected : {selected}")
 
-# display x-ray 
-try : 
-    st.image("./assets/images/tested_cases/" + selected + ".png", width=500)
-except : 
-    st.warning("No image selected ! ")
-
-# display content of associated json
+# retrieve content of associated json
 try :
-    with open("./assets/json_responses/tested_cases/" + selected +"_response.json") as f:
+    with open("./assets/json_responses/tested_cases/" + selected +"_response.json", "r", encoding="utf-8") as f:
         selected_content = json.load(f)
-    st.dataframe(pd.DataFrame.from_dict(selected_content, orient="index", columns=["Value"]))
+    
 except :
     st.warning("JSON couldn't be read !")
+
+display_image_dec("./assets/images/tested_cases/" + selected + ".png", selected_content)
