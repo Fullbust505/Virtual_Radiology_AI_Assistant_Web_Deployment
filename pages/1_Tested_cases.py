@@ -46,12 +46,19 @@ selected = st.sidebar.selectbox(
 
 st.write(f"You selected : {selected}")
 
+file_path = "./assets/images/tested_cases/" + selected + ".png"
+
 # retrieve content of associated json
 try :
     with open("./assets/json_responses/tested_cases/" + selected +"_response.json", "r", encoding="utf-8") as f:
         selected_content = json.load(f)
+
     
 except :
-    st.warning("JSON couldn't be read !")
+    st.warning("No immages selected !")
 
-display_image_dec("./assets/images/tested_cases/" + selected + ".png", selected_content)
+try : 
+    display_image_dec(file_path, selected_content)
+
+except : 
+    st.warning("Issue with display_image_desc function !")

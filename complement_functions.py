@@ -2,6 +2,10 @@ import streamlit as st
 from PIL import Image
 from pathlib import Path
 from io import BytesIO
+import uuid
+import time
+import json
+import os
 
 def define_style() :
     # --- STYLE CARDS USED TO DESCRIBE X-RAY --- #
@@ -223,15 +227,40 @@ def display_image_dec(image, json) :
     )
 
 
+def _secure_suffix(name: str) -> str:
+    return Path(name).suffix.lower()
+
+
 def upload_user_image_to_directory(uploaded_file: st.runtime.uploaded_file_manager.UploadedFile) :
+    suffix = _secure_suffix(uploaded_file.name)
     UPLOAD_DIR = Path("./assets/images/user_images")
 
-    safe_name = uploaded_file.name
+    dest_path = UPLOAD_DIR / uploaded_file.name
 
-    dest_path = UPLOAD_DIR / safe_name
+    already_uploaded_files = [elem.split('.')[0] for elem in os.listdir("./assets/images/user_images")]
 
+    if uploaded_file.name.split(".")[0] in already_uploaded_files :
+        dest_path = UPLOAD_DIR / f"{uuid.uuid4().hex}{suffix}"
+     
     # uploaded_file is file-like: write its bytes to disk
     with open(dest_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
     
     return dest_path
+
+
+# --- FUNCTION TO FIND X-RAY DATA FROM FILE --- #
+def process_radiology_image(image_file_name):
+    # Simulation analyse image avec retrait json
+    with st.spinner("FAKE analysis of the AI.... (time.sleep)"):
+        time.sleep(1.5)
+
+
+        # DISCLAIMER : For now, it's a simple JSON read, but it has to be enhanced by the real json retrieved from the AI
+        try:
+            with open("./assets/json_responses/user_images/" + image_file_name + "_response.json", "r", encoding="utf-8") as file:
+                data = json.load(file)
+            return data
+        except FileNotFoundError:
+            st.error("Critical Error : associated data not found (name doesn't match)")
+            return None
