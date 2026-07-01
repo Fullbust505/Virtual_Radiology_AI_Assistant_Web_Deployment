@@ -4,6 +4,9 @@ from PIL import Image
 # title
 st.title("IA Radio Assistant", text_alignment="center")
 
+st.sidebar.success("Select a page here")
+
+
 st.markdown('''
 Hi ! Welcome to your new AI Radiology Assistant. The purpose of this AI is to analyze images and make a pseudo-diagnostic over it.<br>
 You can do 2 things here : <br>
